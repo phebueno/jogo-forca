@@ -17,6 +17,7 @@ section.lado-palavra{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-end;
 }
 section p{
     color:red;
@@ -46,7 +47,7 @@ div.letras-box{
     flex-wrap: wrap;
     gap:12px;
 }
-div.letterbox{
+button.letra-box{
     width: 40px;
     height: 40px;
     border: 1px solid #7AA7C7;
@@ -61,6 +62,10 @@ div.letterbox{
     display: flex;
     align-items: center;
     justify-content: center;        
+}
+button.letra-box.letra-escolhida{
+    background-color: #9FAAB5;
+    color:#798A9F;
 }
 div.chute{
     margin: 60px 0;
