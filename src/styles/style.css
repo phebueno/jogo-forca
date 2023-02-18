@@ -20,9 +20,14 @@ section.lado-palavra{
     align-items: flex-end;
 }
 section p{
-    color:red;
     font-family: 'Noto Sans', sans-serif;
     font-size:50px;
+}
+section p.acerto{
+    color:#27AE60
+}
+section p.erro{
+    color:#FF0000;
 }
 button.botao-palavra{
     width: 200px;

@@ -11,23 +11,27 @@ export default function App() {
   //A variável arrForcas recebe o valor de tentativas atual de erros 
   //do useState para definir qual imagem enviar
   const [tentativas, setTentativas] = useState(0);
+  const [acertos, setAcertos] = useState(0);
 
   function escolherPalavra(palavras){
     const palavraAleatoria = palavras[Math.floor(Math.random() * palavras.length)];
     setArrPalavraEscondida(palavraAleatoria.split(''));
     setLetrasEscolhidas([]);
+    setAcertos(0);
+    setTentativas(0);
   }
   
   //Atualiza o array de letras que já foram escolhidas:
   //Se erra, soma um ao contador de contabilizar o erro também?
   function escolherLetra(letra){
     setLetrasEscolhidas([...letrasEscolhidas,letra])
-    if(!arrPalavraEscondida.includes(letra)) setTentativas(tentativas+1);
+    if(!arrPalavraEscondida.includes(letra)) setTentativas(tentativas+1); //errou
+    else setAcertos(acertos+1);
 }
 
   return (
     <div className="App">
-      <Jogo imgForca={arrForcas[tentativas]} palavras={palavras} arrPalavraEscondida={arrPalavraEscondida} escolherPalavra={escolherPalavra} letrasEscolhidas={letrasEscolhidas}/>
+      <Jogo imgForca={arrForcas[tentativas]} palavras={palavras} arrPalavraEscondida={arrPalavraEscondida} escolherPalavra={escolherPalavra} letrasEscolhidas={letrasEscolhidas} acertos={acertos} tentativas={tentativas}/>
       <footer>
         <Letras letrasEscolhidas={letrasEscolhidas} escolherLetra={escolherLetra} arrPalavraEscondida={arrPalavraEscondida}/>
         <div className="chute">

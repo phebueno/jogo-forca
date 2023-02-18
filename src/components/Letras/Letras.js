@@ -1,7 +1,6 @@
 import alfabeto from "./alfabeto";
 
-export default function Letras({letrasEscolhidas, escolherLetra, arrPalavraEscondida}) {    
-  console.log(arrPalavraEscondida.length);
+export default function Letras({letrasEscolhidas, escolherLetra, arrPalavraEscondida}) { 
   return (
     <div className="letras-box">
         {alfabeto.map((letra,index)=>(
