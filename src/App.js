@@ -22,11 +22,16 @@ export default function App() {
   }
   
   //Atualiza o array de letras que já foram escolhidas:
-  //Se erra, soma um ao contador de contabilizar o erro também?
   function escolherLetra(letra){
     setLetrasEscolhidas([...letrasEscolhidas,letra])
-    if(!arrPalavraEscondida.includes(letra)) setTentativas(tentativas+1); //errou
-    else setAcertos(acertos+1);
+    if(!arrPalavraEscondida.includes(letra)){
+      setTentativas(tentativas+1); //errou
+      if((tentativas+1)===6) setLetrasEscolhidas(alfabeto); //errou todas as vezes
+    } 
+    else{
+      setAcertos(acertos+1); //acertou
+      if((acertos+1)===arrPalavraEscondida.length) setLetrasEscolhidas(alfabeto); //acertou todas as vezes
+    } 
 }
 
   return (
