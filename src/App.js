@@ -1,7 +1,7 @@
 import arrForcas from "./components/Jogo/enderecoImagensForca.js";
 import Jogo from "./components/Jogo/Jogo";
 import Letras from "./components/Letras/Letras";
-import palavras from "./components/Jogo/palavras";
+import palavras from "./palavras";
 import alfabeto from "./components/Letras/alfabeto.js";
 import { useState } from "react";
 export default function App() {
