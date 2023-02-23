@@ -7,7 +7,7 @@ export default function Jogo({ imgForca, palavras, arrPalavraEscondida, escolher
       <img data-test="game-image" src={imgForca} alt="" />
       <section className="lado-palavra">
         <button data-test="choose-word" className="botao-palavra" onClick={()=>escolherPalavra(palavras)}>Escolher Palavra</button>
-        <p data-test="word" className={`${acerto} ${erro}`}>{arrPalavraEscondida.map((letra)=>(letrasEscolhidas.includes(letra) ? letra : " _"))}</p>
+        <p data-test="word" className={`${acerto} ${erro}`}>{arrPalavraEscondida.map((letra)=>(letrasEscolhidas.includes(letra.normalize("NFD").replace(/\p{Diacritic}/gu, "")) ? letra : " _"))}</p>
       </section>
     </main>
   );
