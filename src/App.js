@@ -4,6 +4,7 @@ import Letras from "./components/Letras/Letras";
 import palavras from "./palavras";
 import alfabeto from "./components/Letras/alfabeto.js";
 import { useState } from "react";
+import Chute from "./components/Chute/Chute.js";
 export default function App() {
   
   const [arrPalavraEscondida, setArrPalavraEscondida] = useState([]);
@@ -12,6 +13,14 @@ export default function App() {
   //do useState para definir qual imagem enviar
   const [tentativas, setTentativas] = useState(0);
   const [acertos, setAcertos] = useState(0);
+  const [chute,setChute] = useState("");
+
+  const palavraCaracteresUnicos = arrPalavraEscondida.filter(apenasUnicos).length;
+
+  //Função que pega apenas caracteres únicos da palavra
+  function apenasUnicos(value, index, array) {
+    return array.indexOf(value) === index;
+  } 
 
   function escolherPalavra(palavras){
     const palavraAleatoria = palavras[Math.floor(Math.random() * palavras.length)];
@@ -19,6 +28,7 @@ export default function App() {
     setLetrasEscolhidas([]);
     setAcertos(0);
     setTentativas(0);
+    setChute("");
   }
   
   //Atualiza o array de letras que já foram escolhidas:
@@ -30,18 +40,27 @@ export default function App() {
     } 
     else{
       setAcertos(acertos+1); //acertou
-      if((acertos+1)===arrPalavraEscondida.length) setLetrasEscolhidas(alfabeto); //acertou todas as vezes
+      if((acertos+1)===palavraCaracteresUnicos) setLetrasEscolhidas(alfabeto); //acertou todas as vezes
     } 
+}
+
+  //Função de chute de palavra
+  function chutar(){
+    if(chute===arrPalavraEscondida.join('')){
+      setAcertos(palavraCaracteresUnicos); //acertou!
+    }
+    else{
+      setTentativas(6);
+    }
+    setLetrasEscolhidas(alfabeto);
 }
 
   return (
     <div className="App">
-      <Jogo imgForca={arrForcas[tentativas]} palavras={palavras} arrPalavraEscondida={arrPalavraEscondida} escolherPalavra={escolherPalavra} letrasEscolhidas={letrasEscolhidas} acertos={acertos} tentativas={tentativas}/>
+      <Jogo imgForca={arrForcas[tentativas]} palavras={palavras} arrPalavraEscondida={arrPalavraEscondida} escolherPalavra={escolherPalavra} letrasEscolhidas={letrasEscolhidas} acertos={acertos} tentativas={tentativas} palavraCaracteresUnicos={palavraCaracteresUnicos}/>
       <footer>
         <Letras letrasEscolhidas={letrasEscolhidas} escolherLetra={escolherLetra} arrPalavraEscondida={arrPalavraEscondida}/>
-        <div className="chute">
-          <input type="text" />
-        </div>
+        <Chute chute={chute} setChute={setChute} chutar={chutar} letrasEscolhidasNum={letrasEscolhidas.length} letrasTotaisNum={alfabeto.length}/>
       </footer>
     </div>
   );
